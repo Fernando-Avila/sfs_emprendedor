@@ -46,7 +46,7 @@ Future<bool> registrar(User us) async {
     return false;
   }
 }
-
+/*
 Future<bool> login(String correo, String clave, BuildContext context) async {
   bool result = false;
 
@@ -64,7 +64,7 @@ Future<bool> login(String correo, String clave, BuildContext context) async {
     result = true;
   } catch (e) {}
   return result;
-}
+}*/
 
 void logout(BuildContext context) {
   final ProviderUser prov = Provider.of<ProviderUser>(context, listen: false);

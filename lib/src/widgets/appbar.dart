@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sfs_emprendedor/src/controll/user_c.dart';
-import 'package:sfs_emprendedor/src/models/user.dart';
+import 'package:sfs_emprendedor/src/models/user_model.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
+import 'package:sfs_emprendedor/src/widgets/Widgetsdesign.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 import '../providers/ProviderUser.dart';
@@ -24,7 +25,7 @@ appbar() {
 
 Padding drawer(context) {
   final ProviderUser prov = Provider.of<ProviderUser>(context, listen: false);
-  var us = prov.us;
+  var us = prov.user;
   return Padding(
     padding: EdgeInsets.only(
         top: 30, right: MediaQuery.of(context).size.width * 0.40),
@@ -33,7 +34,7 @@ Padding drawer(context) {
         child: prov.logged
             ? ListView(
                 children: [
-                  userinfo(MediaQuery.of(context).size.height * 0.25, us),
+                  userinfo(MediaQuery.of(context).size.height * 0.25, us!),
                   btn(1, 'asset/icons/degradado/iconlogo.png', 'Cuenta',
                       context),
                   btn(6, 'asset/icons/degradado/iconsocio.png',
@@ -48,7 +49,7 @@ Padding drawer(context) {
               )
             : ListView(
                 children: [
-                  userinfo(MediaQuery.of(context).size.height * 0.25, us),
+                  // userinfo(MediaQuery.of(context).size.height * 0.25, us!),
                   btn(1, 'asset/icons/degradado/iconlogo.png', 'Cuenta',
                       context),
                   btn(3, 'asset/icons/degradado/iconsolicitud.png',
@@ -75,7 +76,8 @@ Widget btn(int op, String image, String title, context) {
                   height: 35,
                 ),
                 const SizedBox(width: 10),
-                H3('¿No tienes cuenta?', EstiloApp.primaryblue, TextAlign.center, 'Montserrat', FontWeight.w500, FontStyle.normal),
+                H4(title, EstiloApp.primaryblue, TextAlign.center, 'Montserrat',
+                    FontWeight.w500, FontStyle.normal),
               ],
             ),
             const Divider(
@@ -95,17 +97,17 @@ void onTabTapped(int Index, context) {
   switch (Index) {
     case 1:
       prov.logged
-          ? Navigator.pushNamed(context, '/account')
-          : Navigator.pushNamed(context, '/login');
+          ? Navigator.pushReplacementNamed(context, '/account')
+          : Navigator.pushReplacementNamed(context, '/login');
       break;
     case 2:
-      Navigator.pushNamed(context, '/myinversions');
+      Navigator.pushReplacementNamed(context, '/myinversions');
       break;
     case 3:
-      Navigator.pushNamed(context, '/oportunidades_page');
+      Navigator.pushReplacementNamed(context, '/oportunidades_page');
       break;
     case 4:
-      Navigator.pushNamed(context, '/calculadora');
+      Navigator.pushReplacementNamed(context, '/calculadora');
       break;
     case 5:
       logout(context);
@@ -113,17 +115,16 @@ void onTabTapped(int Index, context) {
           context, '/home_page', (route) => false);
       break;
     case 6:
-      Navigator.pushNamed(context, '/mysolicitud');
+      Navigator.pushReplacementNamed(context, '/mysolicitud');
       break;
     case 7:
-      Navigator.pushNamed(context, '/addsolicitud');
+      Navigator.pushReplacementNamed(context, '/addsolicitud');
       break;
     default:
   }
 }
 
 Widget userinfo(double d, User us) {
-  String userimage = '';
   return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -135,12 +136,9 @@ Widget userinfo(double d, User us) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ClipOval(
-                child: Icon(
-              Icons.person,
-              size: 70,
-            )),
-            H3(us.nombre, EstiloApp.primaryblue, TextAlign.center, 'Montserrat', FontWeight.w500, FontStyle.normal),
+            FotoPerfil(image: us.photoPerfil, size: 80),
+            H3(us.nombres, EstiloApp.primaryblue, TextAlign.center,
+                'Montserrat', FontWeight.w500, FontStyle.normal),
           ],
         ),
       ));

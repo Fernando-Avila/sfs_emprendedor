@@ -1,14 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:sfs_emprendedor/src/controll/user_c.dart';
-import 'package:sfs_emprendedor/src/models/user.dart';
+import 'package:sfs_emprendedor/src/controll/user_controller.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
 import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 import 'dart:async';
-import '../../widgets/Widgetsdialogs.dart';
+
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -16,22 +15,16 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
-  final _formKey = GlobalKey<FormState>();
-  final _nombre = TextEditingController();
-  final _apellido = TextEditingController();
-  final _correo = TextEditingController();
-  final _clave = TextEditingController();
-  final _confirmclave = TextEditingController();
-  String mail = "";
-  int caso = 0;
+class _RegisterState extends StateMVC<Register> {
   bool newemail = false;
-  Timer? timer;
+
   bool conditions = false;
+  UserController _con = UserController();
+  int caso = 0;
   @override
   void initState() {
     super.initState();
-    emailstatus();
+    _con.emailstatus();
   }
 
   @override
@@ -41,7 +34,9 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    _con.context = context;
     return Scaffold(
+      key: _con.scaffoldKey,
       appBar: AppBar(
         backgroundColor: EstiloApp.primaryblue,
         automaticallyImplyLeading: false,
@@ -71,20 +66,21 @@ class _RegisterState extends State<Register> {
 
   Widget form() {
     return Form(
-      key: _formKey,
+      key: _con.registerKey,
       child: Column(
         children: <Widget>[
-          textfield('Nombres', _nombre, false),
-          textfield('Apellidos', _apellido, false),
-          textfield('Correo Electronico', _correo, true),
-          textfield('Contraseña', _clave, true),
-          textfield('Confirmar Contraseña', _confirmclave, true),
+          textfield('Nombres', _con.nombre, false),
+          textfield('Apellidos', _con.apellido, false),
+          textfield('Correo Electronico', _con.correo, false),
+          textfield('Contraseña', _con.clave, true),
+          textfield('Confirmar Contraseña', _con.confirmclave, true),
         ],
       ),
     );
   }
 
   Widget body() {
+    caso = _con.caso;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: ListView(
@@ -113,7 +109,7 @@ class _RegisterState extends State<Register> {
                           child: Column(
                             children: <Widget>[
                               H4(
-                                  'Esperando confirmacion enviada a $mail ',
+                                  'Esperando confirmacion enviada a ${_con.mail} ',
                                   EstiloApp.primaryblue,
                                   TextAlign.center,
                                   'Montserrat',
@@ -157,11 +153,9 @@ class _RegisterState extends State<Register> {
                             InkWell(
                               borderRadius: BorderRadius.circular(60),
                               splashColor: Colors.grey,
-                              onTap: () {
-                                deleteuser();
-                                setState(() {
-                                  caso = 3;
-                                });
+                              onTap: () async {
+                                await _con.deleteuser();
+                                setState(() {});
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -299,16 +293,11 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Function? val() {
-    if (_formKey.currentState!.validate()) {
-      register();
-    }
-    return null;
-  }
-
-  String? validator(String value) {
-    if (value == null || value.isEmpty) {
-      return 'Campo obligatorio';
+  Future<Function?> val() async {
+    if (_con.registerKey.currentState!.validate()) {
+      if (await _con.register2()) {
+        setState(() {});
+      }
     }
     return null;
   }
@@ -319,9 +308,7 @@ class _RegisterState extends State<Register> {
       height: 40,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          validator(value!);
-        },
+        validator: (value) => _con.validator(value!),
         autofocus: false,
         controller: control,
         autocorrect: true,
@@ -353,21 +340,17 @@ class _RegisterState extends State<Register> {
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
           ),
-          label: p2(title, EstiloApp.colorblack, TextAlign.center, 'Montserrat',
+          label: p1(title, EstiloApp.colorblack, TextAlign.center, 'Montserrat',
               FontWeight.w400, FontStyle.normal),
         ),
       ),
     );
   }
 
-  deleteuser() {
-    final user = auth.FirebaseAuth.instance.currentUser;
-    user!.delete();
-    timer?.cancel();
-  }
-
   register() async {
-    var us = User(1, _nombre.text, _apellido.text, "null", "null", _correo.text,
+    _con.apellido.clear();
+    print(_con.context);
+    /* var us = User(1, _nombre.text, _apellido.text, "null", "null", _correo.text,
         _clave.text, "null", "emprendedor", "null", "emprendedor");
     if (await registrar(us)) {
       setState(() {
@@ -376,30 +359,6 @@ class _RegisterState extends State<Register> {
         timer =
             Timer.periodic(Duration(seconds: 3), (Timer t) => emailverify());
       });
-    }
-  }
-
-  void emailstatus() {
-    final user = auth.FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      caso = 1;
-    } else if (!user.emailVerified) {
-      caso = 2;
-      mail = user.email!;
-      timer = Timer.periodic(Duration(seconds: 3), (Timer t) => emailverify());
-    } else {
-      caso = 3;
-    }
-  }
-
-  emailverify() async {
-    await auth.FirebaseAuth.instance.currentUser!.reload();
-    final user = auth.FirebaseAuth.instance.currentUser;
-    if (user!.emailVerified) {
-      timer!.cancel();
-      Succes(context, 'Registro completado', 2);
-    } else {
-      print('Aun no verifica');
-    }
+    }*/
   }
 }

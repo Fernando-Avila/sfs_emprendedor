@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sfs_emprendedor/src/global/routes.dart';
+import 'package:sfs_emprendedor/src/pages/auth/login.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
 import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
@@ -75,7 +77,7 @@ class _PrincipalState extends State<Principal> {
                   'Montserrat', FontWeight.w800, FontStyle.normal),
               SizedBox(height: height * 0.1),
               button(() {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, PageRoutes().login);
               },
                   H5('INICIAR SESION', EstiloApp.colorwhite, TextAlign.center,
                       'Montserrat', FontWeight.w500, FontStyle.normal),
@@ -84,7 +86,7 @@ class _PrincipalState extends State<Principal> {
                   EstiloApp.horizontalgradientpurplepink),
               SizedBox(height: height * 0.01),
               button(() {
-                print('SS');
+                Navigator.pushNamed(context, '/register');
               },
                   H5('REGISTRARSE', EstiloApp.colorwhite, TextAlign.center,
                       'Montserrat', FontWeight.w500, FontStyle.normal),
@@ -132,6 +134,4 @@ class _PrincipalState extends State<Principal> {
       ],
     );
   }
-
- 
 }

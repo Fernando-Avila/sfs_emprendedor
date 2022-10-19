@@ -52,7 +52,7 @@ Widget H4(String text, MaterialColor c, TextAlign align, String fontfamily,
 
 Widget H5(String text, MaterialColor c, TextAlign align, String fontfamily,
     FontWeight fontWeight, FontStyle fontStyle) {
-  return Text(text,
+  return AutoSizeText(text,
       textAlign: align,
       style: TextStyle(
           fontFamily: fontfamily,
@@ -75,7 +75,7 @@ Widget H0(String text, MaterialColor c, TextAlign align, String fontfamily,
 
 Widget p1(String text, MaterialColor c, TextAlign align, String fontfamily,
     FontWeight fontWeight, FontStyle fontStyle) {
-  return Text(text,
+  return AutoSizeText(text,
       textAlign: align,
       style: TextStyle(
           fontFamily: fontfamily,

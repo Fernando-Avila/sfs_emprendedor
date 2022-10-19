@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sfs_emprendedor/src/providers/ProviderUser.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
+import 'package:sfs_emprendedor/src/widgets/Widgetsdesign.dart';
 import 'package:sfs_emprendedor/src/widgets/Widgetsdialogs.dart';
 import 'package:sfs_emprendedor/src/widgets/appbar.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
@@ -40,7 +41,7 @@ class _CalculadoraState extends State<Calculadora> {
             IconButton(
                 onPressed: () => Navigator.maybePop(context),
                 icon: Icon(Icons.arrow_back_ios)),
-           // textH3('Calculadora', EstiloApp.colorwhite, FontWeight.w100),
+            // textH3('Calculadora', EstiloApp.colorwhite, FontWeight.w100),
             SizedBox()
           ],
         ),
@@ -58,10 +59,10 @@ class _CalculadoraState extends State<Calculadora> {
       padding: EdgeInsets.all(10),
       child: ListView(children: [
         calc(),
-        /*Padding(
+        Padding(
           padding: EdgeInsets.all(20.0),
-          child: tablaAmortizacion(calculo()),
-        ),*/
+          child: tablaAmortizacion(amortizacion: calculo()),
+        )
       ]),
     );
   }

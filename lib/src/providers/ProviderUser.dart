@@ -1,8 +1,23 @@
-
 import 'package:flutter/material.dart';
-import 'package:sfs_emprendedor/src/models/user.dart';
+import 'package:sfs_emprendedor/src/models/user_model.dart';
 
 class ProviderUser extends ChangeNotifier {
+  User? _user;
+
+  User? get user => _user;
+  set user(User? user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  String _token = '';
+
+  String get token => _token;
+  set token(String token) {
+    _token = token;
+    notifyListeners();
+  }
+
   bool _logged = false;
   bool get logged => _logged;
   set logged(bool logged) {
@@ -21,14 +36,6 @@ class ProviderUser extends ChangeNotifier {
   int get idop => _idop;
   set idop(int idop) {
     _idop = idop;
-    notifyListeners();
-  }
-
-  User _us = User(1, 'nombre', 'apellido', 'fechanacimiento', 'cedula',
-      'correo', 'clave', 'celular', 'rol', 'ciudad', 'tipo');
-  User get us => _us;
-  set us(User us) {
-    _us = us;
     notifyListeners();
   }
 }

@@ -91,8 +91,36 @@ class EstiloApp {
       Colors.transparent,
     ],
   );
-  static  BoxDecoration decorationBoxwhite = BoxDecoration(
+  static BoxDecoration decorationBoxwhite = BoxDecoration(
       color: EstiloApp.colorwhite,
       boxShadow: kElevationToShadow[9],
       borderRadius: BorderRadius.circular(20));
+
+  static InputDecoration inputdecoration(Widget widget) {
+    return InputDecoration(
+      errorStyle: const TextStyle(
+          color: EstiloApp.colorblack, fontSize: 8, height: 0.2),
+      focusedBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+      ),
+      enabledBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+      ),
+      errorBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+      ),
+      disabledBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+      ),
+      focusedErrorBorder: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+      ),
+      label: widget,
+    );
+  }
 }
