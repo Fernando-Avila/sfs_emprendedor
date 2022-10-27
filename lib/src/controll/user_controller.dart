@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ import 'package:http/http.dart' as http;
 class UserController extends ControllerMVC {
   bool hidePassword = true;
   bool loading = false;
+  bool confirmsave = false;
   int caso = 0;
   User user = User();
   GlobalKey<FormState> loginFormKey = GlobalKey();
@@ -33,6 +35,7 @@ class UserController extends ControllerMVC {
   final apellido = TextEditingController();
   final correo = TextEditingController();
   final clave = TextEditingController();
+  final contacto = TextEditingController();
   final confirmclave = TextEditingController();
   File? buro;
   final burotext = TextEditingController();
@@ -96,7 +99,7 @@ class UserController extends ControllerMVC {
         apellidos: apellido.text,
         email: correo.text,
         password: clave.text,
-        phone: '09999');
+        phone: contacto.text);
     // chargedialog(context, 'Cargando', 'Registrando Emprendedor');
     httpRegisterUserPost(user).then((value) {
       //  Navigator.pop(context);
@@ -153,9 +156,27 @@ class UserController extends ControllerMVC {
         });
       } catch (e) {
         print(e);
-        Errordialog(context, 'Error al iniciar Sesion, Reintente');
+        //  Errordialog(context, 'Error al iniciar Sesion, Reintente');
       }
     }
+  }
+
+  Future RestartInfo(BuildContext context) async {
+    final userprov = Provider.of<ProviderUser>(context, listen: false);
+    int id = userprov.user!.id;
+    httpUserGet(id, userprov.token).then((value) async {
+      if (value.statusCode == 200) {
+        final userprov = Provider.of<ProviderUser>(context, listen: false);
+        final prefs = await SharedPreferences.getInstance();
+        var respuesta = jsonDecode(value.body);
+        var userdata = User.fromJson(respuesta['Applicant']);
+        userprov.user = userdata;
+        userprov.logged = true;
+        await prefs.setInt('id', userprov.user!.id);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(snackBarerror);
+      }
+    });
   }
 
   Widget datosperfil(double width) {
@@ -208,14 +229,102 @@ class UserController extends ControllerMVC {
     if (pdfFormKey.currentState!.validate()) {
       print('Upload');
       print(buro!.path);
-      var value = await httpRegisterBuroPost(buro!, user.id, prov.token);
-      if (value.statusCode == 200) {
-        return true;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(snackBarerror);
+      await ConfirmSave(AlertConfirmAutorization());
+      if (confirmsave) {
+        ConfirmSave(
+            ChargueDialog(context, 'Cargando', 'Subiendo Archivo al servidor'));
+        var value = await httpRegisterBuroPost(buro!, user.id, prov.token);
+        await UserController().RestartInfo(context);
+        await Future.delayed(Duration(seconds: 1));
+        Navigator.pop(context);
+        if (value.statusCode == 200) {
+          await Flushbar(
+            flushbarPosition: FlushbarPosition.TOP,
+            margin: EdgeInsets.all(10),
+            borderRadius: BorderRadius.circular(15),
+            forwardAnimationCurve: Curves.easeInOutBack,
+            backgroundGradient: EstiloApp.horizontalgradientpurplepink,
+            blockBackgroundInteraction: true,
+            onStatusChanged: (status) {
+              print(status.toString());
+            },
+            messageText: p1(
+                'Documento guardado con éxito',
+                EstiloApp.colorwhite,
+                TextAlign.left,
+                'Montserrat',
+                FontWeight.w500,
+                FontStyle.normal),
+            titleText: H4('Correcto', EstiloApp.colorwhite, TextAlign.left,
+                'Montserrat', FontWeight.w500, FontStyle.normal),
+            duration: Duration(seconds: 3),
+          ).show(context);
+          Navigator.pop(context);
+
+          return true;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(snackBarerror);
+        }
       }
     }
     return false;
+  }
+
+  ConfirmSave(Widget alert) async {
+    await showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      pageBuilder: (ctx, a1, a2) {
+        return Container();
+      },
+      transitionBuilder: (ctx, a1, a2, child) {
+        var curve = Curves.easeInOut.transform(a1.value);
+        return Transform.scale(
+          scale: curve,
+          child: alert,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 300),
+    );
+  }
+
+  AlertConfirmAutorization() {
+    return AlertDialog(
+      title: SizedBox(
+        width: 400,
+        height: 30,
+        child: H4('Confirmar registro', EstiloApp.primaryblue, TextAlign.left,
+            'Montserrat', FontWeight.w400, FontStyle.normal),
+      ),
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: H5(
+            'Se registrará su documento, una vez registrado no se podrá cambiar ni editar',
+            EstiloApp.primaryblue,
+            TextAlign.left,
+            'Montserrat',
+            FontWeight.w400,
+            FontStyle.normal),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            confirmsave = false;
+            Navigator.of(context).pop();
+          },
+          child: p2('Cancelar', EstiloApp.primaryblue, TextAlign.left,
+              'Montserrat', FontWeight.w600, FontStyle.normal),
+        ),
+        TextButton(
+          onPressed: () {
+            confirmsave = true;
+            Navigator.pop(context);
+          },
+          child: p2('Aceptar', EstiloApp.primarypurple, TextAlign.left,
+              'Montserrat', FontWeight.w600, FontStyle.normal),
+        ),
+      ],
+    );
   }
 
   Future<bool> saveFile(String url, String fileName) async {

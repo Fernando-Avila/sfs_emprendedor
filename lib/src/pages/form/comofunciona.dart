@@ -10,7 +10,7 @@ import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class Comofunciona extends StatefulWidget {
-  const Comofunciona({Key? key}) : super(key: key);
+   Comofunciona({Key? key}) : super(key: key);
 
   @override
   _ComofuncionaState createState() => _ComofuncionaState();
@@ -31,7 +31,7 @@ class _ComofuncionaState extends State<Comofunciona> {
               onPressed: () => prov.logged
                   ? Navigator.pushNamed(context, '/account')
                   : Navigator.pushNamed(context, '/login'),
-              icon: const Icon(Icons.person))
+              icon:  Icon(Icons.person))
         ],
         elevation: 0,
         // centerTitle: true,
@@ -59,7 +59,7 @@ class _ComofuncionaState extends State<Comofunciona> {
     return ListView(
       children: [
         info(),
-        const Divider(
+         Divider(
           height: 20,
           thickness: 3,
           indent: 30,
@@ -85,7 +85,7 @@ class _ComofuncionaState extends State<Comofunciona> {
               FontWeight.w300,
               FontStyle.normal),
           Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding:  EdgeInsets.only(top: 20),
             child: p2(
                 'Juntos definen las condiciones que los harán crecer. Nosotros nos encargamos de hacerlo posible.',
                 EstiloApp.primarypink,
@@ -140,12 +140,12 @@ class _ComofuncionaState extends State<Comofunciona> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              padding:  EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                     EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
-                    boxShadow: const [
+                    boxShadow:  [
                       BoxShadow(
                         color: Colors.black54,
                         blurRadius: 4,
@@ -264,9 +264,9 @@ class _ComofuncionaState extends State<Comofunciona> {
                           },
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding:  EdgeInsets.all(12),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding:  EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             decoration: BoxDecoration(
                                 color: EstiloApp.primaryblue,
@@ -295,10 +295,10 @@ class _ComofuncionaState extends State<Comofunciona> {
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary: EstiloApp.primarypink,
-                                    padding: const EdgeInsets.symmetric(
+                                    padding:  EdgeInsets.symmetric(
                                         horizontal: 25, vertical: 5),
                                     shadowColor: EstiloApp.primarypurple,
-                                    shape: const RoundedRectangleBorder(
+                                    shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(15)),
                                     ),
@@ -345,7 +345,7 @@ Widget text(String title, double pd) {
   return Padding(
     padding: EdgeInsets.only(top: pd),
     child: Container(
-      padding: const EdgeInsets.all(5),
+      padding:  EdgeInsets.all(5),
       decoration: BoxDecoration(
           color: EstiloApp.primaryblue, borderRadius: BorderRadius.circular(5)),
       child: p3(title, EstiloApp.colorwhite, TextAlign.center, 'Montserrat',

@@ -11,7 +11,8 @@ import 'package:sfs_emprendedor/src/widgets/appbar.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 class AccountEmp extends StatefulWidget {
-  const AccountEmp({Key? key}) : super(key: key);
+  static GlobalKey mtAppKey = GlobalKey();
+  AccountEmp({Key? key}) : super(key: key);
 
   @override
   _AccountState createState() => _AccountState();
@@ -34,7 +35,7 @@ class _AccountState extends StateMVC<AccountEmp> {
           children: [
             IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios)),
+                icon: Icon(Icons.arrow_back_ios)),
             Expanded(
               child: p2(
                   'Tu perfil Emprendedor',
@@ -80,13 +81,13 @@ class _AccountState extends StateMVC<AccountEmp> {
                         children: <Widget>[
                           Container(
                             width: 120,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: EstiloApp.colorwhite,
                             ),
                             child: FotoPerfil(image: us!.photoPerfil, size: 80),
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15),
                           data('Nombre', '${us.nombres} ${us.apellidos}'),
                         ],
                       ),
@@ -124,11 +125,11 @@ class _AccountState extends StateMVC<AccountEmp> {
                       ),
                       BtnDegraded(
                           metod: () {
-                            Navigator.pushNamed(context, '/editperfil',
+                            Navigator.pushNamed(context, '/burocredit',
                                 arguments: prov.user);
                           },
                           widget: p2(
-                              'Detalles',
+                              'Buro',
                               EstiloApp.colorwhite,
                               TextAlign.center,
                               'Montserrat',

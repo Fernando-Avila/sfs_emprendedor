@@ -15,7 +15,7 @@ import 'package:sfs_emprendedor/src/widgets/appbar.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 class Mysolicitud extends StatefulWidget {
-  const Mysolicitud({Key? key}) : super(key: key);
+  Mysolicitud({Key? key}) : super(key: key);
 
   @override
   _MysolicitudState createState() => _MysolicitudState();
@@ -55,7 +55,7 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
             children: [
               IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back_ios)),
+                  icon: Icon(Icons.arrow_back_ios)),
               SizedBox()
             ],
           ),
@@ -67,7 +67,7 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
                 onPressed: () => prov.logged
                     ? Navigator.pushNamed(context, '/account')
                     : Navigator.pushNamed(context, '/login'),
-                icon: const Icon(Icons.person))
+                icon: Icon(Icons.person))
           ],
         ),
         body: body(),
@@ -160,14 +160,14 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
   Widget _detailsolicitud(BuildContext context, int index, Solicitud data) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
-      decoration: BoxDecoration(boxShadow: const [
+      margin: EdgeInsets.only(right: 20, left: 20, bottom: 10),
+      decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: Colors.black54,
           blurRadius: 4,
           offset: Offset(2, 2),
         ),
-      ], color: EstiloApp.colorwhite, borderRadius: BorderRadius.circular(50)),
+      ], color: EstiloApp.colorwhite, borderRadius: BorderRadius.circular(35)),
       child: ListView(
         children: <Widget>[
           SizedBox(
@@ -181,18 +181,18 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50)),
+                          topLeft: Radius.circular(35),
+                          topRight: Radius.circular(35)),
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.cover,
                       ),
                     ),
                     child: Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50)),
+                              topLeft: Radius.circular(35),
+                              topRight: Radius.circular(35)),
                           gradient: EstiloApp.horizontalgradienttransparent),
                     ),
                   ),
@@ -206,7 +206,7 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
                               'https://pbs.twimg.com/profile_images/945853318273761280/0U40alJG_400x400.jpg'),
                           fit: BoxFit.cover)),
                   child: Container(
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50)),
@@ -315,7 +315,7 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
                         height: 40),
                   ],
                 ),
-                const Divider(
+                Divider(
                   height: 30,
                   thickness: 3,
                   color: EstiloApp.primarypink,

@@ -6,7 +6,7 @@ import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 class Principal extends StatefulWidget {
-  const Principal({Key? key}) : super(key: key);
+   Principal({Key? key}) : super(key: key);
 
   @override
   _PrincipalState createState() => _PrincipalState();
@@ -36,7 +36,7 @@ class _PrincipalState extends State<Principal> {
       children: [
         Stack(children: <Widget>[
           Container(
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               color: Colors.transparent,
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -49,7 +49,7 @@ class _PrincipalState extends State<Principal> {
           ),
           Container(
             height: height / 2,
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
                 color: Colors.white, gradient: EstiloApp.verticalgradientwhite),
           )
         ]),
@@ -64,7 +64,7 @@ class _PrincipalState extends State<Principal> {
                     gradient: EstiloApp.horizontalgradientpurplepink,
                     borderRadius: BorderRadius.circular(60)),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                     EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                 child: H2(
                     'QUE BUSCAS CON LOS',
                     EstiloApp.colorwhite,
@@ -110,7 +110,7 @@ class _PrincipalState extends State<Principal> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 50),
+            padding:  EdgeInsets.only(bottom: 50),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,7 +119,7 @@ class _PrincipalState extends State<Principal> {
                   'asset/icons/degradado/iconlogo.png',
                   width: 70,
                 ),
-                const Text('SFS',
+                 Text('SFS',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: 'Montserrat',

@@ -9,8 +9,8 @@ class Dropdown extends StatelessWidget {
   final MaterialColor color;
   final double width;
   final Function() metodo;
-  const Dropdown(this.list, this.textediting, this.color, this.width,
-      this.title, this.metodo);
+  Dropdown(this.list, this.textediting, this.color, this.width, this.title,
+      this.metodo);
   @override
   Widget build(
     BuildContext context,
@@ -34,7 +34,7 @@ class Dropdown extends StatelessWidget {
                 border: Border.all(width: 0.02),
                 boxShadow: kElevationToShadow[3]),
             child: DropdownButton<String>(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
               dropdownColor: color,
               items: list.map((String a) {
                 return DropdownMenuItem(value: a, child: Text(a));
@@ -54,7 +54,7 @@ class Dropdown extends StatelessWidget {
                     return null;
                   },
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     color: EstiloApp.primaryblue,
                     fontFamily: 'Montserrat',
@@ -62,29 +62,29 @@ class Dropdown extends StatelessWidget {
                   ),
                   readOnly: true,
                   decoration: InputDecoration(
-                    errorStyle: const TextStyle(
+                    errorStyle: TextStyle(
                         color: EstiloApp.colorblack, fontSize: 10, height: 0.3),
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide:
                           BorderSide(width: 1, color: EstiloApp.primarypink),
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide:
                           BorderSide(width: 1, color: EstiloApp.primarypink),
                     ),
-                    errorBorder: const OutlineInputBorder(
+                    errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide:
                           BorderSide(width: 1, color: EstiloApp.primarypurple),
                     ),
-                    disabledBorder: const OutlineInputBorder(
+                    disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide:
                           BorderSide(width: 1, color: EstiloApp.primarypink),
                     ),
-                    focusedErrorBorder: const OutlineInputBorder(
+                    focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide:
                           BorderSide(width: 1, color: EstiloApp.primarypurple),
@@ -150,26 +150,26 @@ class Textfield extends StatelessWidget {
           cursorColor: EstiloApp.primaryblue,
           decoration: InputDecoration(
               prefixIcon: widget ?? null,
-              errorStyle: const TextStyle(
-                  color: EstiloApp.colorblack, fontSize: 9, height: 0.3),
-              focusedBorder: const OutlineInputBorder(
+              errorStyle: TextStyle(
+                  color: EstiloApp.colorblack, fontSize: 10, height: 0.3),
+              focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
               ),
-              enabledBorder: const OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
               ),
-              errorBorder: const OutlineInputBorder(
+              errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide:
                     BorderSide(width: 1, color: EstiloApp.primarypurple),
               ),
-              disabledBorder: const OutlineInputBorder(
+              disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
               ),
-              focusedErrorBorder: const OutlineInputBorder(
+              focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 borderSide:
                     BorderSide(width: 1, color: EstiloApp.primarypurple),
@@ -217,25 +217,25 @@ class Textfieldml extends StatelessWidget {
           readOnly: readonly,
           decoration: InputDecoration(
             prefixIcon: widget ?? null,
-            errorStyle: const TextStyle(
+            errorStyle: TextStyle(
                 color: EstiloApp.colorblack, fontSize: 8, height: 0.1),
-            focusedBorder: const OutlineInputBorder(
+            focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
             ),
-            enabledBorder: const OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
             ),
-            errorBorder: const OutlineInputBorder(
+            errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
             ),
-            disabledBorder: const OutlineInputBorder(
+            disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
             ),
-            focusedErrorBorder: const OutlineInputBorder(
+            focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
               borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
             ),
@@ -251,7 +251,7 @@ class BtnWhite extends StatelessWidget {
   final Widget widget;
   final double width;
   final double height;
-  const BtnWhite(
+  BtnWhite(
       {Key? key,
       required this.metod,
       required this.widget,
@@ -267,7 +267,7 @@ class BtnWhite extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * width,
         height: height,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: EstiloApp.decorationBoxwhite,
         child: Center(child: widget),
       ),
@@ -279,7 +279,7 @@ class Parraftext extends StatelessWidget {
   final Widget widget;
   final double width;
   final double height;
-  const Parraftext(
+  Parraftext(
       {Key? key,
       required this.widget,
       required this.width,
@@ -303,7 +303,7 @@ class BtnDegraded extends StatelessWidget {
   final Widget widget;
   final double width;
   final double height;
-  const BtnDegraded(
+  BtnDegraded(
       {Key? key,
       required this.metod,
       required this.widget,
@@ -319,7 +319,7 @@ class BtnDegraded extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * width,
         height: height,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
             gradient: EstiloApp.horizontalgradientpurplepink,
             boxShadow: kElevationToShadow[9],
@@ -335,7 +335,7 @@ class BtnBlue extends StatelessWidget {
   final Widget widget;
   final double width;
   final double height;
-  const BtnBlue(
+  BtnBlue(
       {Key? key,
       required this.metod,
       required this.widget,
@@ -348,12 +348,13 @@ class BtnBlue extends StatelessWidget {
       borderRadius: BorderRadius.circular(60),
       splashColor: EstiloApp.primarypink,
       onTap: metod,
-      child: Ink(
+      child: Container(
         width: MediaQuery.of(context).size.width * width,
         height: height,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
             gradient: EstiloApp.horizontalgradientblue,
+            color: EstiloApp.primaryblue,
             boxShadow: kElevationToShadow[9],
             borderRadius: BorderRadius.circular(60)),
         child: Center(child: widget),

@@ -1,8 +1,5 @@
-import 'package:animated_icon/animate_icon.dart';
-import 'package:animated_icon/animate_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:provider/provider.dart';
 import 'package:sfs_emprendedor/src/controll/galeria_controller.dart';
@@ -74,8 +71,10 @@ class _AddgaleryState extends StateMVC<Addgalery> {
       child: SingleChildScrollView(
           child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          Container(
+            decoration: EstiloApp.decorationBoxwhite,
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: Wrap(
                 spacing: 30,
                 runSpacing: 20,
@@ -83,6 +82,13 @@ class _AddgaleryState extends StateMVC<Addgalery> {
                 runAlignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
+                  H5(
+                      'Puedes agregar Imágenes desde tu dispositivo, para luego guardarlas en la galería de tu emprendimiento',
+                      EstiloApp.primaryblue,
+                      TextAlign.center,
+                      'Montserrat',
+                      FontWeight.w600,
+                      FontStyle.normal),
                   BtnDegraded(
                       metod: () async {
                         await _con.getImages();
@@ -93,7 +99,7 @@ class _AddgaleryState extends StateMVC<Addgalery> {
                           EstiloApp.colorwhite,
                           TextAlign.center,
                           'Montserrat',
-                          FontWeight.w600,
+                          FontWeight.w500,
                           FontStyle.italic),
                       width: 0.3,
                       height: 40),
@@ -112,7 +118,7 @@ class _AddgaleryState extends StateMVC<Addgalery> {
                           }
                         }
                         if (correct) {
-                          Navigator.pop(context);
+                          _con.SuccesGalery();
                         }
                       },
                       widget: p1(
@@ -120,7 +126,7 @@ class _AddgaleryState extends StateMVC<Addgalery> {
                           EstiloApp.colorwhite,
                           TextAlign.center,
                           'Montserrat',
-                          FontWeight.w600,
+                          FontWeight.w500,
                           FontStyle.italic),
                       width: 0.3,
                       height: 40),

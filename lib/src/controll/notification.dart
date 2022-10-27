@@ -1,7 +1,9 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-void notifycation(RemoteNotification notification) async {
+Future notifycation(RemoteNotification notification) async {
   print(notification.title);
   print(notification.body);
   print(notification.titleLocArgs.length);
@@ -12,12 +14,10 @@ void notifycation(RemoteNotification notification) async {
   print(notification.android!.link);
   print(notification.android!.clickAction);
   print(notification.android!.channelId);
-
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-          'com.example.pickup_conductor_main', 'principal');
+      AndroidNotificationDetails('com.example.sfs_emprendedor', 'principal');
   const NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
   await flutterLocalNotificationsPlugin.show(
@@ -40,7 +40,6 @@ class NotificationService {
   Future<void> init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/launcher_icon');
-
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid, iOS: null, macOS: null);
@@ -53,5 +52,7 @@ class NotificationService {
 
   Future selectNotification(String? payload) async {
     //Handle notification tapped logic here
+    print(payload);
+    print('Notificaciooon');
   }
 }

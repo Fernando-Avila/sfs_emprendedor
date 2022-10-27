@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
 class EstiloApp {
-  static const MaterialColor primaryblue =
+  static MaterialColor primaryblue =
       MaterialColor(_primarioPrimaryValue, <int, Color>{
     900: Color.fromARGB(90, 0, 23, 92),
     1000: Color(_primarioPrimaryValue),
   });
-  static const int _primarioPrimaryValue = 0xFF00175C;
+  static int _primarioPrimaryValue = 0xFF00175C;
 
-  static const MaterialColor primarypink =
+  static MaterialColor primarypink =
       MaterialColor(_primarypinkValue, <int, Color>{
     1000: Color(_primarypinkValue),
   });
-  static const int _primarypinkValue = 0xFFE3355C;
+  static int _primarypinkValue = 0xFFE3355C;
 
-  static const MaterialColor primarypurple =
+  static MaterialColor primarypurple =
       MaterialColor(_primarypurpleValue, <int, Color>{
     1000: Color(_primarypurpleValue),
   });
-  static const int _primarypurpleValue = 0xFFB434AC;
+  static int _primarypurpleValue = 0xFFB434AC;
 
-  static const MaterialColor colorwhite =
+  static MaterialColor colorwhite =
       MaterialColor(_colorwhiteValue, <int, Color>{
     1000: Color(_colorwhiteValue),
   });
-  static const int _colorwhiteValue = 0xFFFFFFFF;
+  static int _colorwhiteValue = 0xFFFFFFFF;
 
-  static const MaterialColor colorblack =
+  static MaterialColor colorblack =
       MaterialColor(_colorblackValue, <int, Color>{
     1000: Color(_colorblackValue),
   });
-  static const int _colorblackValue = 0xFF000000;
+  static int _colorblackValue = 0xFF000000;
 
-  static const LinearGradient horizontalgradientpurplepink = LinearGradient(
+  static LinearGradient horizontalgradientpurplepink = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment(0.0, 1.0),
     colors: <Color>[
@@ -41,7 +41,16 @@ class EstiloApp {
     ],
   );
 
-  static const LinearGradient horizontalgradientblue = LinearGradient(
+  static LinearGradient horizontalgradientpurplepinknotify = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment(0.0, 1.0),
+    colors: <Color>[
+      Color.fromARGB(160, 180, 52, 171),
+      Color.fromARGB(113, 227, 53, 91),
+    ],
+  );
+
+  static LinearGradient horizontalgradientblue = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment(0.0, 1.0),
     colors: <Color>[
@@ -49,7 +58,7 @@ class EstiloApp {
       EstiloApp.primaryblue,
     ],
   );
-  static const LinearGradient verticalgradientwhite = LinearGradient(
+  static LinearGradient verticalgradientwhite = LinearGradient(
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
     colors: <Color>[
@@ -57,7 +66,7 @@ class EstiloApp {
       Color.fromARGB(10, 255, 255, 255),
     ],
   );
-  static const LinearGradient horizontalgradienttransparent = LinearGradient(
+  static LinearGradient horizontalgradienttransparent = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     stops: [
@@ -74,8 +83,7 @@ class EstiloApp {
     ],
   );
 
-  static const LinearGradient horizontalgradientmediumtransparent =
-      LinearGradient(
+  static LinearGradient horizontalgradientmediumtransparent = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     stops: [
@@ -98,25 +106,25 @@ class EstiloApp {
 
   static InputDecoration inputdecoration(Widget widget) {
     return InputDecoration(
-      errorStyle: const TextStyle(
-          color: EstiloApp.colorblack, fontSize: 8, height: 0.2),
-      focusedBorder: const OutlineInputBorder(
+      errorStyle:
+          TextStyle(color: EstiloApp.colorblack, fontSize: 8, height: 0.2),
+      focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
       ),
-      enabledBorder: const OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
       ),
-      errorBorder: const OutlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
       ),
-      disabledBorder: const OutlineInputBorder(
+      disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
       ),
-      focusedErrorBorder: const OutlineInputBorder(
+      focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
       ),

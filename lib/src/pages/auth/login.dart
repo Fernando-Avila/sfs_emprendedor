@@ -7,7 +7,7 @@ import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  Login({Key? key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -30,7 +30,7 @@ class _LoginState extends StateMVC<Login> {
       children: <Widget>[
         Container(
           height: MediaQuery.of(context).size.height / 2,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
@@ -52,7 +52,7 @@ class _LoginState extends StateMVC<Login> {
                     'asset/img/iconlogo.png',
                     width: 130,
                   ),
-                  const Text(
+                  Text(
                     'SFS',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
@@ -67,7 +67,7 @@ class _LoginState extends StateMVC<Login> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           child: Form(
             key: _con.loginFormKey,
             child: Column(
@@ -108,7 +108,7 @@ class _LoginState extends StateMVC<Login> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: EdgeInsets.only(top: 15),
                   child: button(() async {
                     await _con.login();
                   },
@@ -122,7 +122,7 @@ class _LoginState extends StateMVC<Login> {
                   children: [
                     TextButton(
                         onPressed: () => chargescreen(context),
-                        child: const Text(
+                        child: Text(
                           '¿Olvidó su Contraseña?',
                           style: TextStyle(
                               fontSize: 18,
@@ -143,7 +143,7 @@ class _LoginState extends StateMVC<Login> {
                         TextButton(
                             onPressed: () =>
                                 Navigator.pushNamed(context, '/register'),
-                            child: const Text(
+                            child: Text(
                               'Registrate',
                               style: TextStyle(
                                   fontSize: 18,

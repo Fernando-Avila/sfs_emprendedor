@@ -8,9 +8,8 @@ import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 import 'dart:async';
 
-
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  Register({Key? key}) : super(key: key);
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -48,7 +47,7 @@ class _RegisterState extends StateMVC<Register> {
               'asset/img/iconlogo.png',
               width: 70,
             ),
-            const Text(
+            Text(
               'SFS',
               style: TextStyle(
                   fontFamily: 'Montserrat',
@@ -72,8 +71,10 @@ class _RegisterState extends StateMVC<Register> {
           textfield('Nombres', _con.nombre, false),
           textfield('Apellidos', _con.apellido, false),
           textfield('Correo Electronico', _con.correo, false),
-          textfield('Contraseña', _con.clave, true),
-          textfield('Confirmar Contraseña', _con.confirmclave, true),
+          textphonefield('Contacto', _con.contacto, false),
+          textpassfield('Contraseña', _con.clave, _con.hidePassword),
+          textpassfield(
+              'Confirmar Contraseña', _con.confirmclave, _con.hidePassword),
         ],
       ),
     );
@@ -82,13 +83,13 @@ class _RegisterState extends StateMVC<Register> {
   Widget body() {
     caso = _con.caso;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: ListView(
         children: [
           H4('REGISTRO', EstiloApp.primaryblue, TextAlign.center, 'Montserrat',
               FontWeight.w400, FontStyle.normal),
           Container(
-              padding: const EdgeInsets.all(30),
+              padding: EdgeInsets.all(30),
               decoration: EstiloApp.decorationBoxwhite,
               child: caso == 3 || caso == 1
                   ? form()
@@ -98,7 +99,7 @@ class _RegisterState extends StateMVC<Register> {
                       runAlignment: WrapAlignment.center,
                       alignment: WrapAlignment.center,
                       children: <Widget>[
-                        const SpinKitThreeBounce(
+                        SpinKitThreeBounce(
                           color: EstiloApp.primaryblue,
                           size: 80,
                         ),
@@ -136,7 +137,7 @@ class _RegisterState extends StateMVC<Register> {
                                 reseendemail(context);
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 15),
                                 decoration: BoxDecoration(
                                     gradient: EstiloApp.horizontalgradientblue,
@@ -158,7 +159,7 @@ class _RegisterState extends StateMVC<Register> {
                                 setState(() {});
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 15),
                                 decoration: BoxDecoration(
                                     gradient:
@@ -180,7 +181,7 @@ class _RegisterState extends StateMVC<Register> {
           Visibility(
               visible: caso == 3 || caso == 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     Row(
@@ -208,8 +209,7 @@ class _RegisterState extends StateMVC<Register> {
                             button(
                                 val,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
                                   child: H4(
                                       'REGISTRARSE',
                                       EstiloApp.colorwhite,
@@ -225,7 +225,7 @@ class _RegisterState extends StateMVC<Register> {
                               visible: !conditions,
                               child: AnimatedOpacity(
                                 opacity: conditions ? 0.0 : 1.0,
-                                duration: const Duration(microseconds: 500),
+                                duration: Duration(microseconds: 500),
                                 child: Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.35,
@@ -246,7 +246,7 @@ class _RegisterState extends StateMVC<Register> {
                           splashColor: Colors.grey,
                           onTap: () => Navigator.pop(context),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 15),
                             decoration: BoxDecoration(
                                 color: EstiloApp.colorwhite,
@@ -275,7 +275,7 @@ class _RegisterState extends StateMVC<Register> {
                             FontStyle.normal),
                         TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: const Text(
+                            child: Text(
                               'Inicia Sesión',
                               style: TextStyle(
                                   fontSize: 18,
@@ -302,6 +302,116 @@ class _RegisterState extends StateMVC<Register> {
     return null;
   }
 
+  Widget textphonefield(
+      String title, TextEditingController control, bool obscure) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      height: 40,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) => _con.validator(value!),
+        autofocus: false,
+        controller: control,
+        autocorrect: true,
+        obscureText: obscure,
+        keyboardType: TextInputType.phone,
+        textCapitalization: TextCapitalization.sentences,
+        textInputAction: TextInputAction.next,
+        cursorColor: EstiloApp.primarypink,
+        cursorWidth: 1,
+        decoration: InputDecoration(
+          errorStyle:
+              TextStyle(color: EstiloApp.colorblack, fontSize: 8, height: 0.1),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+          ),
+          label: p1(title, EstiloApp.colorblack, TextAlign.center, 'Montserrat',
+              FontWeight.w400, FontStyle.normal),
+        ),
+      ),
+    );
+  }
+
+  Widget textpassfield(
+      String title, TextEditingController control, bool obscure) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      height: 40,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Campo requerido';
+          } else if (_con.clave.text != _con.confirmclave.text) {
+            return 'Clave no coincide';
+          } else {
+            return null;
+          }
+        },
+        autofocus: false,
+        controller: control,
+        autocorrect: true,
+        obscureText: obscure,
+        textCapitalization: TextCapitalization.sentences,
+        textInputAction: TextInputAction.next,
+        cursorColor: EstiloApp.primarypink,
+        cursorWidth: 1,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _con.hidePassword = !_con.hidePassword;
+                });
+              },
+              icon: _con.hidePassword
+                  ? Icon(Icons.visibility_off, color: EstiloApp.primarypink)
+                  : Icon(Icons.visibility, color: EstiloApp.primarypink)),
+          errorStyle:
+              TextStyle(color: EstiloApp.colorblack, fontSize: 8, height: 0.1),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
+          ),
+          label: p1(title, EstiloApp.colorblack, TextAlign.center, 'Montserrat',
+              FontWeight.w400, FontStyle.normal),
+        ),
+      ),
+    );
+  }
+
   Widget textfield(String title, TextEditingController control, bool obscure) {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
@@ -318,25 +428,25 @@ class _RegisterState extends StateMVC<Register> {
         cursorColor: EstiloApp.primarypink,
         cursorWidth: 1,
         decoration: InputDecoration(
-          errorStyle: const TextStyle(
-              color: EstiloApp.colorblack, fontSize: 8, height: 0.1),
-          focusedBorder: const OutlineInputBorder(
+          errorStyle:
+              TextStyle(color: EstiloApp.colorblack, fontSize: 8, height: 0.1),
+          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
           ),
-          enabledBorder: const OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
           ),
-          errorBorder: const OutlineInputBorder(
+          errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
           ),
-          disabledBorder: const OutlineInputBorder(
+          disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypink),
           ),
-          focusedErrorBorder: const OutlineInputBorder(
+          focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(width: 1, color: EstiloApp.primarypurple),
           ),

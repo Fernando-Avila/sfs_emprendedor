@@ -42,7 +42,10 @@ Future httpRegistersolicitudPost(Solicitud solicitud, String token) async {
       http.MultipartRequest("POST", Uri.parse(Enviroment.apiUrl + path));
   var requests = await encode(solicitud, request);
   print(requests.fields);
-  return await requests.send();
+  var value = await requests.send();
+  var response = await http.Response.fromStream(value);
+  print(response.body);
+  return value;
 
   /* return await http
       .post(url,
@@ -152,6 +155,8 @@ class Solicitud {
         categoriaNegocio: json["categoria_negocio"] == null
             ? null
             : json["categoria_negocio"],
+        //verificacion:
+        //json["verificacion"] == null ? null : json["verificacion"],
         verificacion:
             json["verificacion"] == null ? null : json["verificacion"],
         valorRecolectado: json["valor_recolectado"] == null

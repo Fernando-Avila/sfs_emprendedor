@@ -17,9 +17,7 @@ appbar() {
     leading: Builder(builder: (context) {
       return leading(context);
     }),
-    actions: [
-      IconButton(onPressed: () => print(''), icon: const Icon(Icons.login))
-    ],
+    actions: [IconButton(onPressed: () => print(''), icon: Icon(Icons.login))],
   );
 }
 
@@ -65,7 +63,7 @@ Widget btn(int op, String image, String title, context) {
   return InkWell(
       onTap: () => onTabTapped(op, context),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         child: Column(
           children: [
             Row(
@@ -75,12 +73,12 @@ Widget btn(int op, String image, String title, context) {
                   image,
                   height: 35,
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 H4(title, EstiloApp.primaryblue, TextAlign.center, 'Montserrat',
                     FontWeight.w500, FontStyle.normal),
               ],
             ),
-            const Divider(
+            Divider(
               height: 10,
               thickness: 2,
               indent: 20,
@@ -124,13 +122,13 @@ void onTabTapped(int Index, context) {
   }
 }
 
-Widget userinfo(double d, User us) {
+Widget userinfo2(double d, User us) {
   return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
               colorFilter: ColorFilter.mode(
                   Colors.white.withOpacity(0.2), BlendMode.dstATop),
-              image: const AssetImage('asset/icons/degradado/iconlogo.png'))),
+              image: AssetImage('asset/icons/degradado/iconlogo.png'))),
       height: d,
       child: Center(
         child: Column(
@@ -144,9 +142,24 @@ Widget userinfo(double d, User us) {
       ));
 }
 
+Widget userinfo(double d, User us) {
+  return UserAccountsDrawerHeader(
+    accountName: H3(us.nombres, EstiloApp.primaryblue, TextAlign.center,
+        'Montserrat', FontWeight.w500, FontStyle.normal),
+    accountEmail: p1(us.email, EstiloApp.primaryblue, TextAlign.center,
+        'Montserrat', FontWeight.w500, FontStyle.normal),
+    currentAccountPicture: FotoPerfil(image: us.photoPerfil, size: 80),
+    decoration: BoxDecoration(
+        image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.2), BlendMode.dstATop),
+            image: AssetImage('asset/icons/degradado/iconlogo.png'))),
+  );
+}
+
 Widget leading(context) {
   return IconButton(
-    icon: const Icon(
+    icon: Icon(
       Icons.menu,
       color: Colors.white,
       size: 30,

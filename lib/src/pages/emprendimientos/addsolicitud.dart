@@ -15,7 +15,7 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Addsolicitud extends StatefulWidget {
-  const Addsolicitud({Key? key}) : super(key: key);
+  Addsolicitud({Key? key}) : super(key: key);
 
   @override
   _AddsolicitudState createState() => _AddsolicitudState();
@@ -36,8 +36,9 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios)),
+                onPressed: () =>
+                    Navigator.canPop(context) ? Navigator.pop(context) : {},
+                icon: Icon(Icons.arrow_back_ios)),
             Expanded(
               child: H3(
                   'CREAR SOLICITUD',
@@ -58,7 +59,7 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
               onPressed: () => prov.logged
                   ? Navigator.pushNamed(context, '/account')
                   : Navigator.pushNamed(context, '/login'),
-              icon: const Icon(Icons.person))
+              icon: Icon(Icons.person))
         ],
       ),
       body: body(),
@@ -97,13 +98,13 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
 
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 15),
+              padding: EdgeInsets.only(bottom: 15),
               child: H3(
                   'Datos Generales',
                   EstiloApp.primarypink,
                   TextAlign.center,
                   'Montserrat',
-                  FontWeight.w400,
+                  FontWeight.w500,
                   FontStyle.normal),
             ),
             p1(
@@ -123,8 +124,9 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                 TextCapitalization.sentences,
                 false,
                 () {},
-                ToolTipeDesing(title: 'Describe un poco tu emprendimiento'),
-                (value) {
+                ToolTipeDesing(
+                    title: 'Describe un poco tu emprendimiento',
+                    color: EstiloApp.primarypink), (value) {
               return validator(value!);
             }),
             Textfield(
@@ -166,7 +168,7 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                         EstiloApp.colorwhite,
                         TextAlign.center,
                         'Montserrat',
-                        FontWeight.w400,
+                        FontWeight.w600,
                         FontStyle.normal),
                     width: 0.6,
                     height: 40),
@@ -177,7 +179,7 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
               splashColor: Colors.grey,
               onTap: () => chargescreen(context),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                padding:  EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 decoration: BoxDecoration(
                     gradient: EstiloApp.horizontalgradientpurplepink,
                     borderRadius: BorderRadius.circular(60)),
@@ -213,11 +215,11 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         decoration: BoxDecoration(
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
                 color: Colors.black54,
                 blurRadius: 4,
@@ -328,9 +330,8 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                   });
                 }),*/
                 Container(
-                  margin: const EdgeInsets.all(12),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  margin: EdgeInsets.all(12),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                       color: EstiloApp.primaryblue,
                       borderRadius: BorderRadius.circular(15)),
@@ -358,10 +359,10 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: EstiloApp.primarypink,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 5),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                           shadowColor: EstiloApp.primarypurple,
-                          shape: const RoundedRectangleBorder(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
                         ),
@@ -403,12 +404,12 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
             color: Colors.white,
             child: imagen == null
                 ? Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 10),
+                    padding: EdgeInsets.only(top: 40, bottom: 10),
                     child: Image.asset(
                       'asset/img/placeholder.png',
                     ))
                 : Padding(
-                    padding: const EdgeInsets.only(top: 40, bottom: 10),
+                    padding: EdgeInsets.only(top: 40, bottom: 10),
                     child: Image.file(
                       imagen,
                     ),
@@ -423,14 +424,17 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                   child: p1(title, EstiloApp.primaryblue, TextAlign.left,
                       'Acumin', FontWeight.w600, FontStyle.normal),
                 ),
-                ToolTipeDesing(title: 'Describe un poco tu emprendimiento.'),
+                ToolTipeDesing(
+                  title: 'Una foto que identifique tu emprendimiento.',
+                  color: EstiloApp.primarypurple,
+                ),
                 InkWell(
                   onTap: () async {
                     _con.foto_emprendimiento =
                         await _con.getImage(ImageSource.gallery);
                     setState(() {});
                   },
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(top: 10.0, left: 20, right: 10),
                     child: Icon(
                       Icons.file_upload,
@@ -445,7 +449,7 @@ class _AddsolicitudState extends StateMVC<Addsolicitud> {
                         await _con.getImage(ImageSource.camera);
                     setState(() {});
                   },
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(top: 10.0, right: 10.0),
                     child: Icon(
                       Icons.camera_alt,

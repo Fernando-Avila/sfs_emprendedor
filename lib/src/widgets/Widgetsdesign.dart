@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sfs_emprendedor/src/global/environment.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:unicons/unicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ToolTipeDesing extends StatelessWidget {
   final String title;
-  const ToolTipeDesing({Key? key, required this.title}) : super(key: key);
+  final Color color;
+  const ToolTipeDesing({Key? key, required this.title, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
         triggerMode: TooltipTriggerMode.tap,
         decoration: BoxDecoration(color: Colors.black45),
-        child: Icon(Icons.info, color: EstiloApp.primarypink),
+        child: Icon(Icons.info, color: color),
         textStyle: TextStyle(
             color: EstiloApp.colorwhite,
             fontFamily: 'Montserrat',
@@ -39,9 +43,7 @@ class chargueSolicitud extends StatelessWidget {
       decoration: EstiloApp.decorationBoxwhite,
       child: Column(
         children: <Widget>[
-
           SkeletonItem(
-            
             child: SkeletonAvatar(
               style: SkeletonAvatarStyle(
                   height: size.height * 0.15, width: size.width),
@@ -216,6 +218,50 @@ class tablaAmortizacion extends StatelessWidget {
       ),
     );
   }
+}
+
+class Networkinfo extends StatelessWidget {
+  final dynamic data;
+  const Networkinfo({Key? key, this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        elevation: 2,
+        child: InkWell(
+          onTap: () async {
+            if (await canLaunchUrl(Uri.parse(data.enlace))) {
+              await launchUrl(Uri.parse(data.enlace));
+            }
+          },
+          child: Row(
+            children: <Widget>[
+              iconetwork(data.network),
+              p3('${data.name}', EstiloApp.primaryblue, TextAlign.left,
+                  'Montserrat', FontWeight.w600),
+            ],
+          ),
+        ));
+  }
+}
+
+Widget iconetwork(network) {
+  Map Iconos = {
+    'Facebook': Icon(Icons.facebook),
+    'Discord': Icon(Icons.discord),
+    'YouTube': Icon(UniconsLine.youtube),
+    'LinkedIn': Icon(UniconsLine.linkedin),
+    'Instagram': Icon(UniconsLine.instagram),
+    'TikTok': Icon(Icons.tiktok),
+    'Twitter': Icon(UniconsLine.twitter),
+    'Pinterest': Icon(Icons.search),
+    'Twitch': Icon(Iconsax.message),
+    'Pagina Web': Icon(Icons.travel_explore),
+  };
+  if (Iconos.containsKey(network)) {
+    return Iconos[network];
+  }
+  return Icon(Icons.travel_explore);
 }
 
 class FotoPerfil extends StatelessWidget {

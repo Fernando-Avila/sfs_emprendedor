@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -9,7 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:sfs_emprendedor/src/models/galeria_model.dart';
 import 'package:sfs_emprendedor/src/models/solicitud_model.dart';
 import 'package:sfs_emprendedor/src/providers/ProviderUser.dart';
+import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
 import 'package:sfs_emprendedor/src/widgets/WidgetsSnack.dart';
+import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
 
 class GaleriaController extends ControllerMVC {
   late BuildContext context;
@@ -22,6 +25,7 @@ class GaleriaController extends ControllerMVC {
   Photo photopost = Photo();
   StreamController<Widget> overlayController =
       StreamController<Widget>.broadcast();
+
   Future getImages() async {
     //final pickedFile = await picker.getImage(source: image);
     final pickedFiles = await _picker.pickMultiImage();
@@ -38,7 +42,6 @@ class GaleriaController extends ControllerMVC {
 
   bool mysolicitud() {
     final userprov = Provider.of<ProviderUser>(context, listen: false);
-
     return solicitud.applicantId == userprov.user!.id;
   }
 
@@ -102,5 +105,24 @@ class GaleriaController extends ControllerMVC {
       }
     }
     return false;
+  }
+
+  SuccesGalery() async {
+    await Flushbar(
+      flushbarPosition: FlushbarPosition.TOP,
+      margin: EdgeInsets.all(10),
+      borderRadius: BorderRadius.circular(15),
+      forwardAnimationCurve: Curves.easeInOutBack,
+      backgroundGradient: EstiloApp.horizontalgradientpurplepinknotify,
+      onStatusChanged: (status) {
+        print(status.toString());
+      },
+      messageText: p1('Galería actualizada', EstiloApp.colorwhite,
+          TextAlign.left, 'Montserrat', FontWeight.w500, FontStyle.normal),
+      titleText: H4('Correcto', EstiloApp.colorwhite, TextAlign.left,
+          'Montserrat', FontWeight.w500, FontStyle.normal),
+      duration: Duration(seconds: 3),
+    ).show(context);
+    Navigator.pop(context);
   }
 }

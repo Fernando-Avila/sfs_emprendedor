@@ -27,7 +27,7 @@ Widget H2(String text, MaterialColor c, TextAlign align, String fontfamily,
 
 Widget H3(String text, MaterialColor c, TextAlign align, String fontfamily,
     FontWeight fontWeight, FontStyle fontStyle) {
-  return Text(text,
+  return AutoSizeText(text,
       textAlign: align,
       style: TextStyle(
           fontFamily: fontfamily,
@@ -41,7 +41,6 @@ Widget H4(String text, MaterialColor c, TextAlign align, String fontfamily,
     FontWeight fontWeight, FontStyle fontStyle) {
   return AutoSizeText(text,
       textAlign: align,
-      maxLines: 2,
       style: TextStyle(
           fontFamily: fontfamily,
           fontStyle: fontStyle,
@@ -99,7 +98,7 @@ Widget p2(String text, MaterialColor c, TextAlign align, String fontfamily,
 
 Widget p3(String text, MaterialColor c, TextAlign align, String fontfamily,
     FontWeight fontWeight) {
-  return Text(text,
+  return AutoSizeText(text,
       textAlign: align,
       style: TextStyle(
           fontFamily: fontfamily,
@@ -115,6 +114,6 @@ Widget p4(String text, MaterialColor c, TextAlign align, String fontfamily,
       style: TextStyle(
           fontFamily: fontfamily,
           color: c,
-          fontSize: 10,
+          fontSize: 11,
           fontWeight: fontWeight));
 }

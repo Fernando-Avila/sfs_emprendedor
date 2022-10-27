@@ -213,7 +213,7 @@ class _CalculadoraState extends State<Calculadora> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 5),
                             shadowColor: EstiloApp.primarypurple,
-                            shape: const RoundedRectangleBorder(
+                            shape:  RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
                             ),

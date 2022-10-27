@@ -67,6 +67,17 @@ Future httpLoginUserPost(String email, String pass, String devicetoken) async {
   });
 }
 
+Future httpUserGet(int id, String token) async {
+  var path = 'api/applicants/$id';
+  var url = Uri.parse(Enviroment.apiUrl + path);
+  return await http
+      .get(url, headers: {"accept": "application/json"}).then((value) async {
+    print(value);
+    print(value.body);
+    return value;
+  });
+}
+
 class User {
   User({
     this.id,

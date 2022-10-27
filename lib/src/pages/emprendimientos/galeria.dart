@@ -84,6 +84,7 @@ class _GaleriaState extends StateMVC<Galeria> {
 
   Widget body() {
     return Stack(
+      fit: StackFit.expand,
       children: [
         Container(
           decoration: BoxDecoration(
@@ -95,77 +96,168 @@ class _GaleriaState extends StateMVC<Galeria> {
               minWidth: MediaQuery.of(context).size.width),
         ),
         SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: FutureBuilder(
-                  future: _con.GetSolicitudGalery(),
-                  builder: (context, snapshot) {
-                    Widget children = SizedBox();
-                    if (snapshot.hasData) {
-                      List data = snapshot.data as List;
-
-                      print(data);
-                      children = Column(
-                        children: <Widget>[
-                          Visibility(
-                            visible: _con.mysolicitud(),
-                            child: BtnWhite(
-                                metod: () => Navigator.pushReplacementNamed(
-                                    context, '/addphoto'),
-                                widget: H4(
-                                    'Agregar Imagenes',
-                                    EstiloApp.primaryblue,
-                                    TextAlign.center,
-                                    'Montserrat',
-                                    FontWeight.w600,
-                                    FontStyle.normal),
-                                width: 0.5,
-                                height: 50),
-                          ),
-                          GridView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent:
-                                          MediaQuery.of(context).size.width / 3,
-                                      childAspectRatio: 3 / 3,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10),
-                              itemCount: data.length,
-                              itemBuilder: (BuildContext ctx, index) {
-                                return photo(data[index], data, index);
-                              })
-                        ],
-                      );
-                    } else if (snapshot.hasError) {
-                      children = ErrorChargue(color: EstiloApp.colorblack);
-                    } else {
-                      children = GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent:
-                                      MediaQuery.of(context).size.width / 3,
-                                  childAspectRatio: 3 / 3,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          itemCount: 15,
-                          itemBuilder: (BuildContext ctx, index) {
-                            return SkeletonAvatar(
-                              style: SkeletonAvatarStyle(
-                                  borderRadius: BorderRadius.circular(5)),
-                            );
-                          });
-                    }
-                    return children;
-                  },
-                ),
-              ),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: FutureBuilder(
+              future: _con.GetSolicitudGalery(),
+              builder: (context, snapshot) {
+                Widget children = SizedBox();
+                if (snapshot.hasData) {
+                  List data = snapshot.data as List;
+                  print(data);
+                  children = data.isNotEmpty
+                      ? children = Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Visibility(
+                              visible: _con.mysolicitud(),
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                decoration: EstiloApp.decorationBoxwhite,
+                                child: Column(
+                                  children: [
+                                    H5(
+                                        'Agrega nuevas Imágenes y da a conocer mejor tu emprendimiento.',
+                                        EstiloApp.primaryblue,
+                                        TextAlign.center,
+                                        'Montserrat',
+                                        FontWeight.w600,
+                                        FontStyle.normal),
+                                    SizedBox(height: 10),
+                                    BtnDegraded(
+                                        metod: () =>
+                                            Navigator.pushReplacementNamed(
+                                                context, '/addphoto'),
+                                        widget: H4(
+                                            'Agregar Imágenes',
+                                            EstiloApp.colorwhite,
+                                            TextAlign.center,
+                                            'Montserrat',
+                                            FontWeight.w500,
+                                            FontStyle.normal),
+                                        width: 0.5,
+                                        height: 50),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        childAspectRatio: 3 / 3,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10),
+                                itemCount: data.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return photo(data[index], data, index);
+                                })
+                          ],
+                        )
+                      : Stack(
+                          children: [
+                            children = GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithMaxCrossAxisExtent(
+                                        maxCrossAxisExtent:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        childAspectRatio: 3 / 3,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10),
+                                itemCount: 15,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return SkeletonAvatar(
+                                    style: SkeletonAvatarStyle(
+                                        borderRadius: BorderRadius.circular(5)),
+                                  );
+                                }),
+                            _con.mysolicitud()
+                                ? Container(
+                                    margin: EdgeInsets.fromLTRB(10, 40, 10, 10),
+                                    decoration: EstiloApp.decorationBoxwhite,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          H4(
+                                              'No dispones de imágenes, Agrega nuevas Imágenes y da a conocer mejor tu emprendimiento.',
+                                              EstiloApp.primaryblue,
+                                              TextAlign.center,
+                                              'Montserrat',
+                                              FontWeight.w600,
+                                              FontStyle.normal),
+                                          SizedBox(height: 20),
+                                          BtnDegraded(
+                                              metod: () => Navigator
+                                                  .pushReplacementNamed(
+                                                      context, '/addphoto'),
+                                              widget: H4(
+                                                  'Agregar Imágenes',
+                                                  EstiloApp.colorwhite,
+                                                  TextAlign.center,
+                                                  'Montserrat',
+                                                  FontWeight.w600,
+                                                  FontStyle.normal),
+                                              width: 0.5,
+                                              height: 50),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    margin: EdgeInsets.fromLTRB(10, 40, 10, 10),
+                                    decoration: EstiloApp.decorationBoxwhite,
+                                    padding: EdgeInsets.all(10),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          H3(
+                                              'El emprendimiento no dispone de imágenes para mostrar',
+                                              EstiloApp.primaryblue,
+                                              TextAlign.center,
+                                              'Montserrat',
+                                              FontWeight.w600,
+                                              FontStyle.normal),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        );
+                } else if (snapshot.hasError) {
+                  children = ErrorChargue(color: EstiloApp.colorblack);
+                } else {
+                  children = GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent:
+                              MediaQuery.of(context).size.width / 3,
+                          childAspectRatio: 3 / 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10),
+                      itemCount: 15,
+                      itemBuilder: (BuildContext ctx, index) {
+                        return SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                              borderRadius: BorderRadius.circular(5)),
+                        );
+                      });
+                }
+                return children;
+              },
+            ),
           ),
         ),
       ],
