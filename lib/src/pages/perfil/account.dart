@@ -27,6 +27,7 @@ class _AccountState extends StateMVC<AccountEmp> {
     _con.context = context;
     _con.user = prov.user!;
     return Scaffold(
+      key: _con.scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         // centerTitle: true,
@@ -79,8 +80,9 @@ class _AccountState extends StateMVC<AccountEmp> {
                     children: [
                       Column(
                         children: <Widget>[
+                          ClipOval(),
                           Container(
-                            width: 120,
+                            width: 80,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: EstiloApp.colorwhite,

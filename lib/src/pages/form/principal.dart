@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sfs_emprendedor/src/global/routes.dart';
-import 'package:sfs_emprendedor/src/pages/auth/login.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
 import 'package:sfs_emprendedor/src/widgets/buttonaccion.dart';
 import 'package:sfs_emprendedor/src/widgets/widgettext.dart';

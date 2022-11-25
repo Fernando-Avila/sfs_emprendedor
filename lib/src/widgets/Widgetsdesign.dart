@@ -12,7 +12,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ToolTipeDesing extends StatelessWidget {
   final String title;
   final Color color;
-  const ToolTipeDesing({Key? key, required this.title, required this.color}) : super(key: key);
+  const ToolTipeDesing({Key? key, required this.title, required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

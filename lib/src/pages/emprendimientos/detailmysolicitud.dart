@@ -1,4 +1,3 @@
-import 'package:animated_icon/animate_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -83,11 +82,101 @@ class _DetailmysolicitudState extends StateMVC<Detailmysolicitud> {
           children: [
             info(),
             history(),
-            verify(),
-            info(),
+            //verify(),
+            // info(),
+            //   pagos(),
           ],
         )
       ],
+    );
+  }
+
+  Widget pagos() {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black54,
+                blurRadius: 4,
+                offset: Offset(2, 2),
+              ),
+            ],
+            color: EstiloApp.colorwhite,
+            borderRadius: BorderRadius.circular(35)),
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: size.height * 0.1,
+                child: Stack(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl:
+                          '${Enviroment.apiUrl}storage/${_con.solicitud.photoEmprendimiento}',
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(35),
+                              topRight: Radius.circular(35)),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(35),
+                                  topRight: Radius.circular(35)),
+                              gradient:
+                                  EstiloApp.horizontalgradienttransparent),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                H5(
+                                    'Información extra',
+                                    EstiloApp.colorwhite,
+                                    TextAlign.center,
+                                    'Montserrat',
+                                    FontWeight.w700,
+                                    FontStyle.normal),
+                                H5(
+                                    '${_con.solicitud.nameUndertaking}',
+                                    EstiloApp.colorwhite,
+                                    TextAlign.center,
+                                    'Montserrat',
+                                    FontWeight.w700,
+                                    FontStyle.normal),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              datahistory()
+            ],
+          ),
+        ),
+      ),
     );
   }
 

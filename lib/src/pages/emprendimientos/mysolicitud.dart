@@ -237,21 +237,21 @@ class _MysolicitudState extends StateMVC<Mysolicitud> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       H5(
-                          '${data.tipoFinanciamiento}',
+                          '${data.nameUndertaking}',
                           EstiloApp.colorwhite,
                           TextAlign.center,
                           'Montserrat',
                           FontWeight.w700,
                           FontStyle.normal),
                       H5(
-                          '${data.nameUndertaking}',
+                          '${data.tipoFinanciamiento}',
                           EstiloApp.colorwhite,
                           TextAlign.center,
                           'Montserrat',
                           FontWeight.w700,
                           FontStyle.normal),
                       p1(
-                          '${data.nameUndertaking}',
+                          data.categoriaEmprendimiento,
                           EstiloApp.colorwhite,
                           TextAlign.center,
                           'Montserrat',

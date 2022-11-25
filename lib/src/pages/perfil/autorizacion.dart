@@ -164,7 +164,7 @@ class _AutorizacionState extends StateMVC<Autorizacion> {
                                 FontStyle.normal),
                             Link(
                               uri: Uri.parse(
-                                  '${Enviroment.apiUrl}uploads/${_con.user.autorizacionBuro}'),
+                                  '${Enviroment.apiUrl}storage/${_con.user.autorizacionBuro}'),
                               target: LinkTarget.blank,
                               builder:
                                   (BuildContext ctx, FollowLink? openLink) {

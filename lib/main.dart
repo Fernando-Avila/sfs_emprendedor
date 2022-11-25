@@ -1,12 +1,9 @@
 import 'dart:async';
-
-import 'package:another_flushbar/flushbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -19,7 +16,7 @@ import 'package:sfs_emprendedor/src/pages/form/home.dart';
 import 'package:sfs_emprendedor/src/providers/ProviderSolicitud.dart';
 import 'package:sfs_emprendedor/src/providers/ProviderUser.dart';
 import 'package:sfs_emprendedor/src/styles/custom_styles.dart';
-import 'package:sfs_emprendedor/src/widgets/widgettext.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
